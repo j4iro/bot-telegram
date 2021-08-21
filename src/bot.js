@@ -55,10 +55,11 @@ bot.on("location", async (ctx) => {
   const resultDb = await placeService.getPlacesNearByCoordinates({
     latitude,
     longitude,
+    limit: 7,
   });
-  console.log(resultDb);
+  // console.log(resultDb);
 
-  let messageReply = `Estos son los 5 lugares de vacunación mas cercanos a tu ubicación:
+  let messageReply = `Estos son los 5 lugares de vacunación mas cercanos a tu ubicación 👇:
 
   `;
   resultDb.forEach((element, i) => {
@@ -73,16 +74,9 @@ bot.on("location", async (ctx) => {
   ctx.reply(messageReply);
 });
 
-// bot.on("sticker", (ctx) => {
-//   console.dir(ctx.message, { depth: null });
-//   // ctx.reply("👍");
-
-//   ctx.replyWithSticker(
-//     "CAACAgIAAxkBAANTYRx1-zoXHQUSTY5pQIrlUyW_KToAAi4BAAIy5PUFdcFznPqwNWIgBA"
-//   );
-// });
-
-bot.help((ctx) => {});
+bot.help((ctx) => {
+  ctx.reply(``);
+});
 
 bot.on("photo", (ctx) => {
   console.dir(ctx.message, { depth: null });

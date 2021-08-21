@@ -85,6 +85,7 @@ async function getPlacesNearByCoordinates(req, res, next) {
   try {
     const latitude = parseFloat(req.query.latitude);
     const longitude = parseFloat(req.query.longitude);
+    const limit = req.query.limit;
 
     if (latitude === undefined || longitude === undefined) {
       return res.status(400).json({
@@ -98,6 +99,7 @@ async function getPlacesNearByCoordinates(req, res, next) {
     const result = await placesService.getPlacesNearByCoordinates({
       latitude: latitude,
       longitude: longitude,
+      limit: limit,
     });
 
     return res.status(200).json({
