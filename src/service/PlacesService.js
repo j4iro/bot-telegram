@@ -1,7 +1,11 @@
 const Place = require("../models/Place");
 
 class PlaceService {
-  getPlacesNearByCoordinates({ latitude, longitude }) {
+  getPlacesNearByCoordinates({ latitude, longitude, limit }) {
+    if (limit === undefined) {
+      limit = 5;
+    }
+
     return Place.aggregate([
       {
         $geoNear: {
@@ -10,7 +14,7 @@ class PlaceService {
           distanceField: "calcDistance",
         },
       },
-      { $limit: 5 },
+      { $limit: limit },
     ]);
   }
 }

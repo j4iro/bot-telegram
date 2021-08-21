@@ -11,6 +11,7 @@ const {
   listPronvinces,
   listDistricts,
   listPlacesByDistrict,
+  getPlacesNearByCoordinates,
 } = require("./controllers/UbigeoController");
 
 // Middlewares
@@ -31,7 +32,8 @@ const router = express.Router();
 router.route("/api/departments").get(listDepartments);
 router.route("/api/provinces").get(listPronvinces);
 router.route("/api/districts").get(listDistricts);
-router.route("/api/place").get(listPlacesByDistrict);
+router.route("/api/places-district").get(listPlacesByDistrict);
+router.route("/api/places").get(getPlacesNearByCoordinates);
 
 app.use(router);
 

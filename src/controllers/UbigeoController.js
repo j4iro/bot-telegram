@@ -81,9 +81,37 @@ async function listPlacesByDistrict(req, res, next) {
   }
 }
 
+async function getPlacesNearByCoordinates(req, res, next) {
+  try {
+    const latitude = parseFloat(req.query.latitude);
+    const longitude = parseFloat(req.query.longitude);
+
+    if (latitude === undefined || longitude === undefined) {
+      return res.status(400).json({
+        success: false,
+        msg: "Latitud y Longitud invalidos",
+        data: {},
+      });
+    }
+
+    // console.log(latitude, longitude);
+    const result = await placesService.getPlacesNearByCoordinates({
+      latitude: latitude,
+      longitude: longitude,
+    });
+
+    return res.status(200).json({
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   listDepartments,
   listPronvinces,
   listDistricts,
   listPlacesByDistrict,
+  getPlacesNearByCoordinates,
 };
